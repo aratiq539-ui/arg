@@ -1,0 +1,29 @@
+services:
+  - type: worker
+    name: arx-personal-ai-agent
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py
+    plan: starter
+    autoDeploy: true
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: ADMIN_IDS
+        sync: false
+      - key: AI_PROVIDER
+        value: gemini
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: AI_MODEL
+        value: gemini-2.5-flash
+      - key: TIMEZONE
+        value: Asia/Dhaka
+      - key: DATA_DIR
+        value: /var/data
+      - key: OWNER_APPROVAL_REQUIRED
+        value: "true"
+    disk:
+      name: arx-agent-data
+      mountPath: /var/data
+      sizeGB: 1
